@@ -1,5 +1,5 @@
 import io.restassured.RestAssured;
-import io.restassured.response.Response;
+import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -13,11 +13,17 @@ public class HelloWorldTest {
         params.put("name", "John");
 
 
-        Response response = RestAssured
+        JsonPath response = RestAssured
                 .given()
                 .queryParams(params)
                 .get("https://playground.learnqa.ru/api/hello")
-                .andReturn();
-        response.prettyPrint();
+                .jsonPath();
+
+        String name = response.get("answer2");
+        if (name == null){
+            System.out.println("Ключ 'answer2' отсутствует");
+        }else {
+            System.out.println(name);
+        }
     }
 }
