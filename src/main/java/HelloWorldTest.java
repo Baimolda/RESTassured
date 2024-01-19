@@ -12,8 +12,8 @@ public class HelloWorldTest {
     @Test
     public void testRestAssured() {
         Map<String,String> data = new HashMap<>();
-        data.put("login","secret_login2");
-        data.put("password", "secret_pass2");
+        data.put("login","secret_login");
+        data.put("password", "secret_pass");
 
         Response responseForGet = RestAssured
                 .given()
