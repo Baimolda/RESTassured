@@ -6,10 +6,8 @@ import static org.hamcrest.Matchers.hasKey;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Assertions {
-    public static void asserJsonByName(Response responseCheckAuth, String userId, int userIdOnAuth) {
-    }
 
-    public void assertJsonByName(Response Response, String name, int expectedValue) {
+    public static void assertJsonByName(Response Response, String name, int expectedValue) {
         Response.then().assertThat().body("$", hasKey(name));
 
         int value = Response.jsonPath().getInt(name);
@@ -31,5 +29,8 @@ public class Assertions {
                 "Response status code is not as expected"
         );
 
+    }
+    public static void assertJsonHasKey(Response Response, String expectedFieldName){
+        Response.then().assertThat().body("$",hasKey(expectedFieldName));
     }
 }

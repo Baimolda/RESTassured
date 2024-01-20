@@ -46,7 +46,7 @@ public class UserAuthTest extends BaseTestCase {
                 .cookie("auth_sid", this.cookie)
                 .get("https://playground.learnqa.ru/api/user/auth")
                 .andReturn();
-        Assertions.asserJsonByName(responseCheckAuth, "user_id", this.userIdOnAuth);
+        Assertions.assertJsonByName(responseCheckAuth, "user_id", this.userIdOnAuth);
     }
 
     @ParameterizedTest
@@ -54,6 +54,7 @@ public class UserAuthTest extends BaseTestCase {
     public void testNegativeAuthUser(String condition) {
         RequestSpecification spec = RestAssured.given();
         spec.baseUri("https://playground.learnqa.ru/api/user/auth");
+
         if (condition.equals("cookie")) {
             spec.cookie("auth_sid", this.cookie);
         } else if (condition.equals("headers")) {
@@ -63,7 +64,7 @@ public class UserAuthTest extends BaseTestCase {
         }
 
         Response responseForCheck = spec.get().andReturn();
-        Assertions.asserJsonByName(responseForCheck, "user_id", 0);
+        Assertions.assertJsonByName(responseForCheck, "user_id", 0);
 
     }
 }
