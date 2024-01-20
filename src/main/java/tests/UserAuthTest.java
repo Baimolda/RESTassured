@@ -16,8 +16,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 import java.util.HashMap;
 import java.util.Map;
 
-@Epic("авторизационный кейсы")
-@Feature("Авторизация")
+@Epic("Authorisation cases")
+@Feature("Authorization")
 public class UserAuthTest extends BaseTestCase {
 
     String cookie;
@@ -42,8 +42,8 @@ public class UserAuthTest extends BaseTestCase {
 
 
     @Test
-    @Description("Успешнное авторизация с email и password")
-    @DisplayName("позитивная авторизация пользователя  ")
+    @Description("This test successfully authorize user by email and password")
+    @DisplayName("Test positive auth user")
     public void testAuthTest() {
         Response responseCheckAuth = apiCoreRequests
                 .makeGetRequest(
@@ -54,8 +54,8 @@ public class UserAuthTest extends BaseTestCase {
         Assertions.assertJsonByName(responseCheckAuth, "user_id", this.userIdOnAuth);
     }
 
-    @Description("этот тест проверяет статус авторизованного пользователя отправленого cookie or token")
-    @DisplayName("негативный тест авторизации")
+    @Description("This test checks authorization status w/o sending auth cookie or token")
+    @DisplayName("Test negative auth user")
     @ParameterizedTest
     @ValueSource(strings = {"cookie", "headers"})
     public void testNegativeAuthUser(String condition) {
